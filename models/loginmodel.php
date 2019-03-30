@@ -6,28 +6,33 @@
       parent::__construct();
       $this->con = $this->db->connect();
     }
-    public function verify($user, $password){
-      $sql = "SELECT usuario FROM usuarios WHERE usuario = $user";
-      $result = $this->con->prepare($sql);
-      $result->execute();
-      $verificado = false;
-      while($result->fetch(PDO::FETCH_ASSOC)){
-        $verificado = true;
-        break;
-      }
-      if($verificado){
+    public function compare($data, $comp, $tab){
+      try{
+        $sql = "SELECT $data FROM $tab WHERE $data = $comp";
+        $result = $this->con->prepare($sql);
+        $result->execute();
+        $verificado = false;
+        while($result->fetch(PDO::FETCH_ASSOC)){
+          $verificado = true;
+          break;
+        }
+        return $verificado;
+      }catch(PDOException $e){
+        return false;
       }
     }
-    private function select($data, $comp, $tab, $con1 = null, $con2 = null){
-      if($con1 != null){
-          $sql = "SELECT $data FROM $tab WHERE $data = $comp AND ";
-      }
+    public function comparePass($data,$pass ,$tab){
+      $sql = "SELECT password FROM $tab WHERE user = $data";
       $result = $this->con->prepare($sql);
       $result->execute();
-      $verificado = false;
-      while($result->fetch(PDO::FETCH_ASSOC)){
-        $verificado = true;
+      while($row = $result->fetch(PDO::FECTH_ASSOC)){
+        $pass_r = $row['password'];
         break;
+      }
+      if(password_verify($pass, $pass_r)){
+        return true;
+      }else{
+        return false;
       }
     }
   }

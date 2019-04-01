@@ -43,13 +43,16 @@
                       <span class="input-group-addon">
                           <i class="glyphicon glyphicon-password"></i>
                       </span>
-                      <input type="password" name="password" class="form-control" placeholder="Contraseña" required >
+                      <input type="password" name="pass" class="form-control" placeholder="Contraseña" required >
                     </div>
                   </div>
                   <div class="form-group">
                     <input type="submit" id="boton_enviar" name="submit" value="Entrar" class="btn btn-primary">
                   </div>
                 </form>
+                <div>
+                  <?php echo $this->mensaje; ?>
+                </div>
               </div>
             </div>
         </div>
@@ -67,6 +70,6 @@
       </div>
     </div>
   </section>
-  <script src="<?php echo constant('URL'); ?>public/js/ajax/login.js"></script>
+  <!-- <script src="<?php echo constant('URL'); ?>public/js/ajax/login.js"></script> -->
 </body>
 </html>

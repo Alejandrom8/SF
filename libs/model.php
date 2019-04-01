@@ -1,9 +1,11 @@
 <?php
 
-class Model{
-  function __construct(){
-    $this->db = new Conection();
-  }
-}
+  class Model{
 
-?>
+    function __construct(){
+        $this->db = new Conection();
+    }
+
+  }
+
+ ?>

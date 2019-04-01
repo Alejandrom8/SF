@@ -1,31 +1,37 @@
 <?php
 
   class LoginModel extends Model{
+
     private $con;
-    function __construct(){
+
+    public function __construct(){
       parent::__construct();
       $this->con = $this->db->connect();
     }
+
     public function compare($data, $comp, $tab){
       try{
-        $sql = "SELECT $data FROM $tab WHERE $data = $comp";
+        $sql = "SELECT $data FROM $tab WHERE $data = '$comp'";
         $result = $this->con->prepare($sql);
         $result->execute();
         $verificado = false;
+
         while($result->fetch(PDO::FETCH_ASSOC)){
           $verificado = true;
           break;
         }
+
         return $verificado;
       }catch(PDOException $e){
         return false;
       }
     }
+
     public function comparePass($data,$pass ,$tab){
-      $sql = "SELECT password FROM $tab WHERE user = $data";
+      $sql = "SELECT password FROM $tab WHERE name = '$data'";
       $result = $this->con->prepare($sql);
       $result->execute();
-      while($row = $result->fetch(PDO::FECTH_ASSOC)){
+      while($row = $result->fetch(PDO::FETCH_ASSOC)){
         $pass_r = $row['password'];
         break;
       }
@@ -35,6 +41,7 @@
         return false;
       }
     }
+
   }
 
 ?>

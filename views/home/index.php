@@ -12,14 +12,15 @@
     <div class="margen">
       <section class=" block col-sm-4" id="menu_form">
         <div class="col-sm-12">
-          <h1>Consulta</h1>
+          <h1>Generar Formatos</h1>
+          <br>
         </div>
         <div class="menu_form_data col-sm-12">
           <form name="data" method="POST" id="data" action="<?php echo constant('URL'); ?>home/create">
               <div class="row">
                 <div class="nivel">
                   <label for="formato">Formato</label>
-                  <select name="formato" class="form-control" id="formato" required>
+                  <select name="formato" class="form-control" id="formato">
                     <option value="">Seleccione un formato</option>
                     <option value="1">Lista de asistencia</option>
                     <optgroup label="horarios">
@@ -33,28 +34,53 @@
                 <div id="config">
                   <div class="options" id="option_1">
                     <div class="form-group row">
+                      <label for="hora_dia">¿Desea generar listas por hora o por dia?</label>
+                      <div class="form-check">
+                        <label class="form-ckeck-label">
+                          <input type="radio" name="hora_dia" value="1" class="form-check-input">Hora
+                        </label>
+                        <span>(Se generará una sola lista)</span>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-ckeck-label">
+                          <input type="radio" name="hora_dia" value="17" class="form-check-input">Dia
+                        </label>
+                        <span>(Se generarán 13 listas)</span>
+                      </div>
+                    </div>
+                    <div class="form-group row">
                       <div class="col-xs-6">
-                        <label for="fecha">Fecha</label>
-                        <input type="date" name="fecha" class="form-control" required>
+                        <div class="form-group">
+                          <label for="fecha">Dia</label>
+                          <select name="fecha" id="fecha" class="form-control">
+                            <option value="LU">Lunes</option>
+                            <option value="MA">Martes</option>
+                            <option value="MI">Miercoles</option>
+                            <option value="JU">Jueves</option>
+                            <option value="VI">Viernes</option>
+                          </select>
+                        </div>
                       </div>
                       <div class="col-xs-6">
-                        <label for="hora">Hora</label>
-                        <select name="hora" id="hora" class="form-control" required>
-                          <option value="">Seleccione una hora</option>
-                          <option value="todos">Todas las horas</option>
-                          <?php
-                            for($i = 1; $i <= 13; $i++){
-                              echo "<option value='$i'>hora $i</option>";
-                            }
-                           ?>
-                        </select>
+                        <div class="form-group">
+                          <label for="hora">Hora</label>
+                          <select name="hora" id="hora" class="form-control">
+                            <option value="">Seleccione una hora</option>
+                            <option value="todos">Todas las horas</option>
+                            <?php
+                              for($i = 1; $i <= sizeof($this->horarios); $i++){
+                                echo "<option value='$i'>hora $i (" . $this->horarios[$i] . ")</option>";
+                              }
+                             ?>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="options" id="option_2">
                     <div class="form-group">
                       <label for="dia">Dia de la semana</label>
-                      <select name="dia" id="dia" class="form-control" required>
+                      <select name="dia" id="dia" class="form-control">
                         <option value="">Selecciona un dia</option>
                         <script>
                           var dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
@@ -66,7 +92,7 @@
                     </div>
                     <div class="form-group">
                       <label for="Grado">Grado</label>
-                      <select name="Grado" id="Grado" class="form-control" required>
+                      <select name="Grado" id="Grado" class="form-control">
                         <option for="4">4°</option>
                         <option for="5">5°</option>
                         <option for="6">6°</option>
@@ -75,7 +101,7 @@
                   </div>
                   <div class="options" id="boton">
                     <div class="form-group">
-                      <input type="submit" name="submit" id="submit_btn" class="btn btn-primary" required>
+                      <input type="submit" name="submit" id="submit_btn" class="btn btn-primary">
                     </div>
                   </div>
                 </div>
@@ -85,8 +111,8 @@
         <div id="form-error">
         </div>
       </section>
-      <section class=" block col-sm-8" id="display">
-
+      <section class="block col-sm-8" id="display">
+        <?php echo $this->mensaje; ?>
       </section>
     </div>
   </div>

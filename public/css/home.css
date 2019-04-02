@@ -12,4 +12,12 @@
 }
 .options{
   display:none;
+  padding:3%;
+}
+.options .form-check span{
+  font-size:1em;
+  color:#999;
+}
+.options .row{
+  width:99%;
 }

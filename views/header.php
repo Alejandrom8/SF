@@ -17,11 +17,6 @@
                    </button>
                  </li>
                  <li>
-                   <button onClick="window.location = '<?php echo constant('URL'); ?>'">
-                     <span class="glyphicon glyphicon-file"></span>Formatos
-                   </button>
-                 </li>
-                 <li>
                    <button onClick="window.location = '<?php echo constant('URL'); ?>salir/saliendo'">
                      <span class="glyphicon glyphicon-log-out"></span>Salir
                    </button>
@@ -32,8 +27,5 @@
         </ul>
       </nav>
     </header>
-    <script>
-
-    </script>
   </div>
 </section>

@@ -1,0 +1,15 @@
+.margen .block{
+  /* background-color:blue; */
+}
+#data .table .row .nivel{
+  display:flex;
+  align-items: center;
+}
+#menu_form{
+  border-right:1.5px solid #222;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.options{
+  display:none;
+}

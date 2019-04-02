@@ -35,6 +35,11 @@ li, a{
   padding:0;
   margin:0;
 }
+.contenedor .margen{
+  margin:3%;
+  width:94%;
+  height:94%;
+}
 #footer {
   background-color: #333;
   width: 100%;

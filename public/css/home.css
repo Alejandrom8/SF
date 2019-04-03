@@ -1,10 +1,10 @@
 .margen .block{
   /* background-color:blue; */
 }
-#data .table .row .nivel{
+/* #data .table .row .nivel{
   display:flex;
   align-items: center;
-}
+} */
 #menu_form{
   border-right:1.5px solid #222;
   border-top-right-radius: 3px;
@@ -20,4 +20,8 @@
 }
 .options .row{
   width:99%;
+}
+#display{
+  height:90%;
+  overflow-y: scroll;
 }

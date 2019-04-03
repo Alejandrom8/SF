@@ -36,12 +36,27 @@ class Home extends Controller{
     return $data;
   }
 
+  function clasifHora($data){
+    $por_hora = array();
+    for($i = 1; $i <= 17; $i++){
+      ${'hora_' . $i} = array();
+      $aux = $i <10 ? "0".$i : $i;
+      foreach($data as $key => $value){
+        if($value['hora'] == $aux){
+          $clase = ["name" => $value['name'], "grupo" => $value['grupo'], "salon" => $value['salon'],"asig" => $value['asig']];
+          array_push(${'hora_' . $i}, $clase);
+        }
+      }
+      array_push($por_hora, ${'hora_' . $i});
+    }
+    return [true, json_encode($por_hora)];
+  }
+
   function create(){
     /* Funcion que se encargara de controlar todos los datos que se
     * soliciten del ciliente al servidor, con esta funcion se
     * construiran los arrays que se imprimiran en pantalla en formato pdf
     */
-
     //formato solicitado 1 = lista de asistencia; 2 = horario
     $formato = $this->test_input($_POST['formato']);
 
@@ -50,12 +65,23 @@ class Home extends Controller{
         $loop = $this->test_input($_POST['hora_dia']);
         $fecha = $this->test_input($_POST['fecha']);
         $hora = $this->test_input($_POST['hora']);
-        $loop . " " . $fecha . " " . $hora;
-        //se toma las iniciales de el dia de la semana solicitado para compararlo con la base de datos
-        // $dias = array("LUNES","MARTES","MI&Eacute;RCOLES","JUEVES","VIERNES");
-        // $dia = $dias[date('w',strtotime($fecha))];
-        // $iniciales = substr($dia,0, 2);
-
+        $tipo = $this->test_input($_POST['tipo_horas']);
+        $lista = $this->model->listar($loop, $fecha, $hora, $tipo);
+        if($lista[0]){
+          if($loop > 1){
+             $clasificar_por_hora = $this->clasifHora($lista[1]);
+             if($clasificar_por_hora[0]){
+               $respuesta = ["estado" => true, "tipo" => "dia", "respuesta" => $clasificar_por_hora[1]];
+             }else{
+               echo json_encode(["estado" => false, "respuesta" => false]);
+             }
+           }else{
+             $respuesta = ["estado" => true, "tipo" => "hora", "respuesta" => json_encode($lista[1])];
+           }
+           echo json_encode($respuesta);
+        }else{
+          echo json_encode(["estado" => false]);
+        }
         break;
 
       default:

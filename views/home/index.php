@@ -19,16 +19,25 @@
           <form name="data" method="POST" id="data" action="<?php echo constant('URL'); ?>home/create">
               <div class="row">
                 <div class="nivel">
-                  <label for="formato">Formato</label>
-                  <select name="formato" class="form-control" id="formato">
-                    <option value="">Seleccione un formato</option>
-                    <option value="1">Lista de asistencia</option>
-                    <optgroup label="horarios">
-                      <option value="2">Grupo</option>
-                      <option value="3">Profesor</option>
-                      <option value="4">Salon</option>
-                    </optgroup>
-                  </select>
+                  <div class="form-group">
+                    <label for="formato">Formato</label>
+                    <select name="formato" class="form-control" id="formato">
+                      <option value="">Seleccione un formato</option>
+                      <option value="1">Lista de asistencia</option>
+                      <optgroup label="horarios">
+                        <option value="2">Grupo</option>
+                        <option value="3">Profesor</option>
+                        <option value="4">Salon</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="tipo_horas">Tipo de servicio</label>
+                    <select name="tipo_horas" class="form-control" id="tipo_horas">
+                      <option value="0">Horas de apoyo</option>
+                      <option value="1">Frente a grupo</option>
+                    </select>
+                  </div>
                 </div>
                 <br>
                 <div id="config">
@@ -66,10 +75,14 @@
                           <label for="hora">Hora</label>
                           <select name="hora" id="hora" class="form-control">
                             <option value="">Seleccione una hora</option>
-                            <option value="todos">Todas las horas</option>
+                            <option value="todas">Todas las horas</option>
                             <?php
                               for($i = 1; $i <= sizeof($this->horarios); $i++){
-                                echo "<option value='$i'>hora $i (" . $this->horarios[$i] . ")</option>";
+                                if($i < 10){
+                                  echo "<option value='0$i'>hora $i (" . $this->horarios[$i] . ")</option>";
+                                }else{
+                                  echo "<option value='$i'>hora $i (" . $this->horarios[$i] . ")</option>";
+                                }
                               }
                              ?>
                           </select>
@@ -112,7 +125,6 @@
         </div>
       </section>
       <section class="block col-sm-8" id="display">
-        <?php echo $this->mensaje; ?>
       </section>
     </div>
   </div>

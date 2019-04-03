@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php include_once 'views/head.php'; ?>
   <title>Home</title>
+  <?php include_once 'views/head.php'; ?>
+  <script src="<?php echo constant('URL'); ?>public/js/jsPDF/dist/jspdf.min.js"></script>
   <link rel="stylesheet" type="text/css" href="<?php echo constant('URL'); ?>public/css/home.css">
 </head>
 <body>

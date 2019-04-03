@@ -43,7 +43,7 @@ class Home extends Controller{
       $aux = $i <10 ? "0".$i : $i;
       foreach($data as $key => $value){
         if($value['hora'] == $aux){
-          $clase = ["name" => $value['name'], "grupo" => $value['grupo'], "salon" => $value['salon'],"asig" => $value['asig']];
+          $clase = ["rfc" => $value['rfc'],"hora" => $value['hora'],"name" => $value['name'], "grupo" => $value['grupo'], "salon" => $value['salon'],"asig" => $value['asig']];
           array_push(${'hora_' . $i}, $clase);
         }
       }
@@ -67,6 +67,7 @@ class Home extends Controller{
         $hora = $this->test_input($_POST['hora']);
         $tipo = $this->test_input($_POST['tipo_horas']);
         $lista = $this->model->listar($loop, $fecha, $hora, $tipo);
+
         if($lista[0]){
           if($loop > 1){
              $clasificar_por_hora = $this->clasifHora($lista[1]);
@@ -82,6 +83,7 @@ class Home extends Controller{
         }else{
           echo json_encode(["estado" => false]);
         }
+
         break;
 
       default:

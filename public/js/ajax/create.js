@@ -23,18 +23,31 @@ $(document).ready(function(){
           if(data.tipo == 'hora'){
             var respuesta = JSON.parse(data.respuesta);
             display.empty();
-            display.append("<table class='table table-striped'><thead><tr><th>Nombre</th><th>Grupo</th><th>Salon</th><th>Materia</th></tr></thead><tbody>");
-            for(var i = 0; i < respuesta.length; i++){
-              display.append(
-                "<tr>"+
-                  "<td>"+ respuesta[i].name +"</td>" +
-                  "<td>"+ respuesta[i].grupo +"</td>" +
-                  "<td>"+ respuesta[i].salon +"</td>" +
-                  "<td>"+ respuesta[i].asig +"</td>"
-                +"</tr>"
-              );
-            }
-            display.append("</tbody></table>");
+            var abrir = "<table class='table table-striped'>" +
+                          "<thead>" +
+                            "<tr>" +
+                              "<th>RFC</th>" +
+                              "<th>Nombre</th>" +
+                              "<th>Materia</th>" +
+                              "<th>Grupo</th>" +
+                              "<th>Salon</th>" +
+                            "</tr>" +
+                          "</thead>" +
+                          "<tbody>";
+                        for(var i = 0; i < respuesta.length; i++){
+                          abrir +=
+                            "<tr>"+
+                              "<td>"+ respuesta[i].rfc + "</td>" +
+                              "<td>"+ respuesta[i].name +"</td>" +
+                              "<td>"+ respuesta[i].asig +"</td>" +
+                              "<td>"+ respuesta[i].grupo +"</td>" +
+                              "<td>"+ respuesta[i].salon +"</td>"
+                            +"</tr>"
+                          ;
+                        }
+                        abrir += "</tbody></table>";
+            // window.open(data.URL, '_blank');
+            display.append(abrir);
           }else if(data.tipo == 'dia'){
             display.empty();
             var horas = JSON.parse(data.respuesta);
@@ -47,24 +60,29 @@ $(document).ready(function(){
                               "</thead>" +
                               "<thead>" +
                                 "<tr>" +
+                                  "<th>RFC</th>" +
+                                  "<th>Hora</th>" +
                                   "<th>Nombre</th>" +
+                                  "<th>Materia</th>" +
                                   "<th>Grupo</th>" +
                                   "<th>Salon</th>" +
-                                  "<th>Materia</th>" +
                                 "</tr>" +
                               "</thead>" +
                               "<tbody>";
                             for(var i = 0; i < horas[o].length; i++){
                               abrir +=
                                 "<tr>"+
+                                  "<td>"+ horas[o][i].rfc + "</td>" +
+                                  "<td>"+ horas[o][i].hora + "</td>" +
                                   "<td>"+ horas[o][i].name +"</td>" +
+                                  "<td>"+ horas[o][i].asig +"</td>" +
                                   "<td>"+ horas[o][i].grupo +"</td>" +
-                                  "<td>"+ horas[o][i].salon +"</td>" +
-                                  "<td>"+ horas[o][i].asig +"</td>"
+                                  "<td>"+ horas[o][i].salon +"</td>"
                               +"</tr>"
                               ;
                             }
               abrir += "</tbody></table>";
+              // window.open(data.URL, '_blank');
               display.append(abrir);
             }
           }else{

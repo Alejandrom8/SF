@@ -62,13 +62,14 @@
                       <div class="col-xs-6">
                         <div class="form-group">
                           <label for="fecha">Dia</label>
-                          <select name="fecha" id="fecha" class="form-control">
+                          <input type="date" name="fecha" id="fecha" class="form-control">
+                          <!-- <select name="fecha" id="fecha" class="form-control">
                             <option value="LU">Lunes</option>
                             <option value="MA">Martes</option>
                             <option value="MI">Miercoles</option>
                             <option value="JU">Jueves</option>
                             <option value="VI">Viernes</option>
-                          </select>
+                          </select> -->
                         </div>
                       </div>
                       <div class="col-xs-6">
@@ -121,6 +122,7 @@
                 </div>
               </div>
           </form>
+          <div id="other_options"></div>
         </div>
         <div id="form-error">
         </div>
@@ -131,5 +133,7 @@
   </div>
   <?php include_once 'views/footer.php'; ?>
   <script src="<?php echo constant('URL'); ?>public/js/ajax/create.js"></script>
+  <script type="text/javascript">
+  </script>
 </body>
 </html>

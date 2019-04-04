@@ -1,4 +1,14 @@
 <?php
+class Respuesta{
+  public $estado;
+  public $tipo;
+  public $respuesta;
+  public $fecha;
+  public $dia;
+  public $H;
+  public $hora;
+}
+
 class Home extends Controller{
 
   function __construct(){
@@ -37,8 +47,15 @@ class Home extends Controller{
   }
 
   function clasifHora($data){
-    $por_hora = array();
-    for($i = 1; $i <= 17; $i++){
+    /*Funcion que clasifica los datos introducidos por hora
+    * @access public
+    * @param Array $data los datos que serán ordenados
+    * @return Array $por_hora array con los datos ordenados por hora
+    */
+
+    $por_hora = array();// Array resultante
+
+    for($i = 1; $i <= 17; $i++){//loop de clasificacion por hora, se repite 17 veces que son el numero de horas que esta activo el plantel 7am-9pm
       ${'hora_' . $i} = array();
       $aux = $i <10 ? "0".$i : $i;
       foreach($data as $key => $value){
@@ -62,28 +79,57 @@ class Home extends Controller{
 
     switch ($formato) {
       case 1://En caso de que sea listas de asistencia
+        //se toman todos los valores que vengan del formulario con id="data" y
+        //se pasan por el metodo test_input para quitar caracteres especiales o extraños
+
         $loop = $this->test_input($_POST['hora_dia']);
         $fecha = $this->test_input($_POST['fecha']);
         $hora = $this->test_input($_POST['hora']);
         $tipo = $this->test_input($_POST['tipo_horas']);
-        $lista = $this->model->listar($loop, $fecha, $hora, $tipo);
 
-        if($lista[0]){
-          if($loop > 1){
-             $clasificar_por_hora = $this->clasifHora($lista[1]);
+        //  obtenemos las primeras 2 iniciales del dia de la semana (ejemplo: LU->LUNES)
+        //  de acuerdo a la variable fecha con formato aaaa-mm-dd
+        $dias = ["DOMINGO", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"];
+        $num_dia = date('w', strtotime($fecha));
+        $dia = $dias[$num_dia];
+        $iniciales = substr($dia,0,2);
+
+        //se llama al metodo 'Listar' de la clase HomeModel para encontrar
+        //todos los datos que concuerden con la busqueda del usuario
+        $lista = $this->model->listar($loop, $iniciales, $hora, $tipo);
+        $estado = $lista[0];
+        $resultado = $lista[1];
+        //se crea un objeto respuesta para almacenar dentro los resultados del proceso de $listar
+        $respuesta = new Respuesta();
+
+        if($estado){
+          if($loop > 1){//Condicion que evalua si hablamos de listado por dia o por hora, en este caso será por dia.
+             $clasificar_por_hora = $this->clasifHora($resultado);
              if($clasificar_por_hora[0]){
-               $respuesta = ["estado" => true, "tipo" => "dia", "respuesta" => $clasificar_por_hora[1]];
+               $respuesta->estado = $clasificar_por_hora[0];
+               $respuesta->tipo = 'dia';
+               $respuesta->respuesta = $clasificar_por_hora[1];
+               $respuesta->fecha = $fecha;
+               $respuesta->dia = $dia;
+               $respuesta->H = $loop;
+               $respuesta->hora = (int)$hora;
              }else{
-               echo json_encode(["estado" => false, "respuesta" => false]);
+               $respuesta->estasdo = false;
              }
            }else{
-             $respuesta = ["estado" => true, "tipo" => "hora", "respuesta" => json_encode($lista[1])];
+             //listado por hora
+              $respuesta->estado = true;
+              $respuesta->tipo = "hora";
+              $respuesta->respuesta = json_encode($resultado);
+              $respuesta->fecha = $fecha;
+              $respuesta->dia = $dia;
+              $respuesta->H = $loop;
+              $respuesta->hora = (int)$hora;
            }
-           echo json_encode($respuesta);
         }else{
-          echo json_encode(["estado" => false]);
+          $respuesta->estado = false;
         }
-
+        echo json_encode($respuesta);
         break;
 
       default:

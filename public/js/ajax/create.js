@@ -4,7 +4,7 @@ $(document).ready(function(){
     var boton = $('#submit_btn');
     var display = $('#display');
     var error = $("#form-error");
-    var boton_section = $("#other_options");
+    var boton_section = $("#boton .another");
 
     $.ajax({
       type: $(this).attr('method'),
@@ -24,10 +24,11 @@ $(document).ready(function(){
           var respuesta = JSON.parse(data.respuesta);
           if(data.tipo == 'hora'){
             display.empty();
-            var abrir = "<table class='table table-striped'>" +
+            var abrir = "<table class='table table-striped'  id='listaTabla'>" +
                           "<thead>" +
                             "<tr>" +
                               "<th>RFC</th>" +
+                              "<th>Hora</th>" +
                               "<th>Nombre</th>" +
                               "<th>Materia</th>" +
                               "<th>Grupo</th>" +
@@ -40,6 +41,7 @@ $(document).ready(function(){
                           abrir +=
                             "<tr>"+
                               "<td>"+ respuesta[i].rfc + "</td>" +
+                              "<td>"+ respuesta[i].hora + "</td>" +
                               "<td>"+ respuesta[i].name +"</td>" +
                               "<td>"+ respuesta[i].asig +"</td>" +
                               "<td>"+ respuesta[i].grupo +"</td>" +
@@ -49,26 +51,28 @@ $(document).ready(function(){
                           ;
                         }
                         abrir += "</tbody></table>";
-            // window.open(data.URL, '_blank');
             display.append(abrir);
           }else if(data.tipo == 'dia'){
             display.empty();
+            var abrir = "<table class='table table-striped' id='listaTabla'>" +
+                                "<thead>" +
+                                    "<tr>"+
+                                      "<th colspan='7'><h1>Listas de asistencia  "+ data.fecha +"</h1></th>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                      "<th>RFC</th>" +
+                                      "<th>Hora</th>" +
+                                      "<th>Nombre</th>" +
+                                      "<th>Materia</th>" +
+                                      "<th>Grupo</th>" +
+                                      "<th>Salon</th>" +
+                                      "<th>CODIGOTEC</th>"+
+                                    "</tr>" +
+                                  "</thead>";
             for(var o = 0; o < respuesta.length; o++){
-              var abrir = "<table class='table table-striped'>" +
-                              "<thead>"+
+                  abrir +=   "<thead>"+
                                 "<tr>" +
-                                  "<th colspan='4'><h3>hora"+ (o+1) +"</h3></th>" +
-                                "</tr>" +
-                              "</thead>" +
-                              "<thead>" +
-                                "<tr>" +
-                                  "<th>RFC</th>" +
-                                  "<th>Hora</th>" +
-                                  "<th>Nombre</th>" +
-                                  "<th>Materia</th>" +
-                                  "<th>Grupo</th>" +
-                                  "<th>Salon</th>" +
-                                  "<th>CODIGOTEC</th>"+
+                                  "<th colspan='7'><h3>hora ~ "+ (o+1) +" (" + HORARIOS[o] +")</h3></th>" +
                                 "</tr>" +
                               "</thead>" +
                               "<tbody>";
@@ -85,13 +89,15 @@ $(document).ready(function(){
                               +"</tr>"
                               ;
                             }
-              abrir += "</tbody></table>";
-              // window.open(data.URL, '_blank');
-              display.append(abrir);
+                    abrir += "</tbody>";
             }
+            abrir += "</table>";
+            display.append(abrir);
           }else{
             console.log(data.estado);
           }
+          boton_section.empty();
+          boton_section.append("<a class='btn btn-success' onclick=\"exportTableToCSV('"+ data.dia + data.fecha + ".csv')\">Exportar tabla </a>");
           // getImageFromUrl(URL+"public/img/plantilla.jpg", pdf);
           pdf(data.tipo, respuesta, data.fecha, data.dia,data.H, data.hora);
         }else{
@@ -116,6 +122,7 @@ $(document).on("change", "#formato", function(){
     $("#boton").css({'display':'block'});
   }
 });
+
 var getImageFromUrl = function(url, callback) {
 	var img = new Image, data, ret={data: null, pending: true};
 
@@ -146,19 +153,17 @@ var getImageFromUrl = function(url, callback) {
 
 	return ret;
 }
-// var pdf = function(imgData){
-//   var fecha = "2019-04-03";
-//   var hora = 2;
-//   var dia = "MARTES";
+
 function pdf(tipo,data,fecha,dia,veces,hora){
   var doc = new jsPDF();
   if(tipo == 'hora'){
     var grupos = Math.round(data.length/26);
     var sobrante = data.length % 26;
-    if(sobrante > 1){
-      grupos++;
-    }
-    for(var i = 1; i <= veces; i++){
+    if(sobrante > 1){grupos++;}
+    // for(var o = 1; o <= veces; o++){//
+      var u = 1;
+      var i = 1;
+
       do{
         doc.setFontSize(10);
         doc.setFont("helvetica");
@@ -186,20 +191,56 @@ function pdf(tipo,data,fecha,dia,veces,hora){
         doc.line(204.5, 48, 204.5, 291);//linea vertical 6
         doc.setFont("helvetica");
         doc.setFontSize(10);
-          for(var u = 0; u < 26; u++){
-            doc.line(6, 61 + (u * 9), 204.5, 61 + (u * 9));//linea horizontal 4
-            doc.text(9,59 + (u * 9), data[u].name);
-            doc.text(99,59 + (u * 9), data[u].grupo);
-            doc.text(114,59 + (u * 9), data[u].salon);
-            doc.text(130,59 + (u * 9), data[u].asig);
+
+        var position = 0;
+
+          // for(u; u <= (i*26); u++){
+          while(u <= (i*26) && data[u-1]){
+            doc.line(6, 61 + (position * 9), 204.5, 61 + (position * 9));//linea horizontal 4
+            doc.text(9,59 + (position * 9), data[u-1].name);
+            doc.text(99,59 + (position * 9), data[u-1].grupo);
+            doc.text(114,59 + (position * 9), data[u-1].salon);
+            doc.text(130,59 + (position * 9), data[u-1].asig);
+            position++;
+            u++;
           }
+          
+        if(i <= grupos){doc.addPage();}
         grupos--;
-        if(i != hora){
-          doc.addPage();
-        }
+        i++;
       }while(grupos > 0);
-    }
+    // }
   }
   // doc.output('datauri');
   doc.save('Test.pdf');
+}
+
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+    csvFile = new Blob([csv], {type: "text/csv"});
+    // Download link
+    downloadLink = document.createElement("a");
+    // File name
+    downloadLink.download = filename;
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    // Hide download link
+    downloadLink.style.display = "none";
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+    // Click download link
+    downloadLink.click();
+}
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("#listaTabla tr");
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+
+        for (var j = 0; j < cols.length; j++)
+            row.push(cols[j].innerText);
+        csv.push(row.join(","));
+    }
+    downloadCSV(csv.join("\n"), filename);
 }

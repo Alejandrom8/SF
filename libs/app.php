@@ -41,12 +41,12 @@ class App{
 
           //  verificamos que halla una sesion iniciada para
           //  que el usuario pueda entrar a los diferentes metodos
-          // if($url[0] != 'main'){
-          //    if(!isset($_SESSION['aula']) or !isset($_SESSION['pass']) or !isset($_SESSION['id'])){
-          //      print("<script>alert('Acceso denegado! Inicie sesion antes de entrar');window.location = '". constant('URL') ."salir';</script>");
-          //      die();
-          //    }
-          // }
+          if($url[0] != 'login'){
+             if(!isset($_SESSION['user']) or !isset($_SESSION['pass'])){
+               print("<script>alert('Acceso denegado! Inicie sesion antes de entrar');window.location = '". constant('URL') ."salir';</script>");
+               die();
+             }
+          }
           //  si en la url se introdujera mas de 2 posiciones (ejemplo: ../controlador[0]/metodo[1]/parametro[2])
           //  se generara un bucle que almacena en un array nuevo llamado 'param' y posteriormente llamamos al archivo
           //  solicitado con el objeto que se indique y los diferentes parametros que se introduscan a la url.

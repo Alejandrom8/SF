@@ -72,7 +72,7 @@ $(document).ready(function(){
             for(var o = 0; o < respuesta.length; o++){
                   abrir +=   "<thead>"+
                                 "<tr>" +
-                                  "<th colspan='7'><h3>hora ~ "+ (o+1) +" (" + HORARIOS[o] +")</h3></th>" +
+                                  "<th colspan='7'><h3>Hora ~ "+ (o+1) +" (" + HORARIOS[o] +")</h3></th>" +
                                 "</tr>" +
                               "</thead>" +
                               "<tbody>";
@@ -204,7 +204,7 @@ function pdf(tipo,data,fecha,dia,veces,hora){
             position++;
             u++;
           }
-          
+
         if(i <= grupos){doc.addPage();}
         grupos--;
         i++;

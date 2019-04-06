@@ -87,23 +87,28 @@ class HomeModel extends Model{
         if($tipo == 0){
           $horario = $dia . $hora;//ejemplo: LU01
           while($row = $sql_generate->fetch(PDO::FETCH_ASSOC)){
+            $hora_1 = substr($row['HR1'],2,2);
+            $hora_2 = substr($row['HR2'],2,2);
+            $hora_3 = substr($row['HR3'],2,2);
+            $hora_4 = substr($row['HR4'],2,2);
+            $hora_5 = substr($row['HR5'],2,2);
             $asignatura = "APOYO";
             if($row['CLAVEASIG'] == 2222 or $row['CLAVEASIG'] == 2223){
               switch ($horario) {
                 case $row['HR1']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON1'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_1,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON1'],"asig" => $asignatura]);
                   break;
                 case $row['HR2']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON2'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_2,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON2'],"asig" => $asignatura]);
                   break;
                 case $row['HR3']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON3'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_3,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON3'],"asig" => $asignatura]);
                   break;
                 case $row['HR4']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON4'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_4,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON4'],"asig" => $asignatura]);
                   break;
                 case $row['HR5']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON5'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_5,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON5'],"asig" => $asignatura]);
                   break;
                 default:
                   break;
@@ -113,6 +118,12 @@ class HomeModel extends Model{
         }else{
           $horario = $dia . $hora;//ejemplo: LU01
           while($row = $sql_generate->fetch(PDO::FETCH_ASSOC)){
+
+            $hora_1 = substr($row['HR1'],2,2);
+            $hora_2 = substr($row['HR2'],2,2);
+            $hora_3 = substr($row['HR3'],2,2);
+            $hora_4 = substr($row['HR4'],2,2);
+            $hora_5 = substr($row['HR5'],2,2);
 
               $asig = "SELECT nombre FROM asignaturas WHERE idasignatura = " . $row['CLAVEASIG'] . " LIMIT 1";
               $asig_get = $this->con->prepare($asig);
@@ -124,19 +135,19 @@ class HomeModel extends Model{
             if($row['CLAVEASIG'] != 2222 and $row['CLAVEASIG'] != 2223){
               switch ($horario) {
                 case $row['HR1']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON1'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_1,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON1'],"asig" => $asignatura]);
                   break;
                 case $row['HR2']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON2'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_2,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON2'],"asig" => $asignatura]);
                   break;
                 case $row['HR3']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON3'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_3,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON3'],"asig" => $asignatura]);
                   break;
                 case $row['HR4']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON4'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_4,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON4'],"asig" => $asignatura]);
                   break;
                 case $row['HR5']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON5'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_5,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON5'],"asig" => $asignatura]);
                   break;
                 default:
                   break;

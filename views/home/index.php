@@ -22,7 +22,7 @@
                 <div class="nivel">
                   <div class="form-group">
                     <label for="formato">Formato</label>
-                    <select name="formato" class="form-control" id="formato">
+                    <select name="formato" id="formato" class="form-control">
                       <option value="">Seleccione un formato</option>
                       <option value="1">Lista de asistencia</option>
                       <optgroup label="horarios">
@@ -115,8 +115,13 @@
                     </div>
                   </div>
                   <div class="options" id="boton">
-                    <div class="form-group">
-                      <input type="submit" name="submit" id="submit_btn" class="btn btn-primary">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <input type="submit" name="submit" id="submit_btn" class="btn btn-primary">
+                      </div>
+                      <div class="col-sm-6 another">
+
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -132,8 +137,8 @@
     </div>
   </div>
   <?php include_once 'views/footer.php'; ?>
-  <script src="<?php echo constant('URL'); ?>public/js/ajax/create.js"></script>
   <script type="text/javascript">
   </script>
 </body>
+<script src="<?php echo constant('URL'); ?>public/js/ajax/create.js"></script>
 </html>

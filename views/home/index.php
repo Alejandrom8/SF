@@ -33,7 +33,7 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="tipo_horas">Tipo de servicio</label>
+                    <label for="tipo_horas">Tipo</label>
                     <select name="tipo_horas" class="form-control" id="tipo_horas">
                       <option value="0">Horas de apoyo</option>
                       <option value="1">Frente a grupo</option>
@@ -63,13 +63,6 @@
                         <div class="form-group">
                           <label for="fecha">Dia</label>
                           <input type="date" name="fecha" id="fecha" class="form-control">
-                          <!-- <select name="fecha" id="fecha" class="form-control">
-                            <option value="LU">Lunes</option>
-                            <option value="MA">Martes</option>
-                            <option value="MI">Miercoles</option>
-                            <option value="JU">Jueves</option>
-                            <option value="VI">Viernes</option>
-                          </select> -->
                         </div>
                       </div>
                       <div class="col-xs-6">

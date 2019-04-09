@@ -34,47 +34,47 @@ class HomeModel extends Model{
               if($value['CLAVEASIG'] == 2222 or $value['CLAVEASIG'] == 2223){
                 switch ($dia) {
                   case $dia_1:
-                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_1,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON1'],"asig" => $asignatura]);
+                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_1,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON1'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                     break;
                   case $dia_2:
-                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_2,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON2'],"asig" => $asignatura]);
+                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_2,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON2'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                     break;
                   case $dia_3:
-                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_3,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON3'],"asig" => $asignatura]);
+                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_3,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON3'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                     break;
                   case $dia_4:
-                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_4,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON4'],"asig" => $asignatura]);
+                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_4,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON4'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                     break;
                   case $dia_5:
-                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_5,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON5'],"asig" => $asignatura]);
+                    array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_5,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON5'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                     break;
                   default:
                     break;
                 }
               }
           }else{
-            $asig = "SELECT nombre FROM asignaturas WHERE idasignatura = " . $value['CLAVEASIG'] . " LIMIT 1";
+            $asig = "SELECT nombre_corto FROM asig WHERE clave = " . $value['CLAVEASIG'] . " LIMIT 1";
             $asig_get = $this->con->prepare($asig);
             $asig_get->execute();
             while($row2 = $asig_get->fetch(PDO::FETCH_ASSOC)){
-              $asignatura = $row2['nombre'];
+              $asignatura = $row2['nombre_corto'];
             }
             if($value['CLAVEASIG'] != 2222 and $value['CLAVEASIG'] != 2223){
               switch ($dia) {
                 case $dia_1:
-                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_1,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON1'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_1,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON1'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                   break;
                 case $dia_2:
-                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_2,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON2'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_2,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON2'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                   break;
                 case $dia_3:
-                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_3,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON3'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_3,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON3'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                   break;
                 case $dia_4:
-                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_4,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON4'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_4,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON4'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                   break;
                 case $dia_5:
-                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_5,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON5'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $value['RFC'] ,"hora" => $hora_5,"name" => $value['NOMBRE'],"grupo" => $value['GRUPO'],"salon" => $value['SALON5'],"asig" => $asignatura,"clave" => $value['CLAVEASIG']]);
                   break;
                 default:
                   break;
@@ -96,19 +96,19 @@ class HomeModel extends Model{
             if($row['CLAVEASIG'] == 2222 or $row['CLAVEASIG'] == 2223){
               switch ($horario) {
                 case $row['HR1']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_1,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON1'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_1,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON1'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 case $row['HR2']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_2,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON2'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_2,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON2'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 case $row['HR3']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_3,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON3'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_3,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON3'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 case $row['HR4']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_4,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON4'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_4,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON4'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 case $row['HR5']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_5,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON5'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_5,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON5'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 default:
                   break;
@@ -125,29 +125,29 @@ class HomeModel extends Model{
             $hora_4 = substr($row['HR4'],2,2);
             $hora_5 = substr($row['HR5'],2,2);
 
-              $asig = "SELECT nombre FROM asignaturas WHERE idasignatura = " . $row['CLAVEASIG'] . " LIMIT 1";
+              $asig = "SELECT nombre_corto FROM asig WHERE clave = " . $row['CLAVEASIG'] . " LIMIT 1";
               $asig_get = $this->con->prepare($asig);
               $asig_get->execute();
               while($row2 = $asig_get->fetch(PDO::FETCH_ASSOC)){
-                $asignatura = $row2['nombre'];
+                $asignatura = $row2['nombre_corto'];
               }
 
             if($row['CLAVEASIG'] != 2222 and $row['CLAVEASIG'] != 2223){
               switch ($horario) {
                 case $row['HR1']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_1,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON1'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_1,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON1'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 case $row['HR2']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_2,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON2'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_2,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON2'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 case $row['HR3']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_3,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON3'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_3,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON3'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 case $row['HR4']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_4,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON4'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_4,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON4'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 case $row['HR5']:
-                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_5,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON5'],"asig" => $asignatura]);
+                  array_push($profesores_listados, ["rfc" => $row['RFC'] ,"hora" => $hora_5,"name" => $row['NOMBRE'],"grupo" => $row['GRUPO'],"salon" => $row['SALON5'],"asig" => $asignatura, "clave" => $row['CLAVEASIG']]);
                   break;
                 default:
                   break;

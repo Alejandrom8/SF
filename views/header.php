@@ -11,9 +11,14 @@
           <li>
              <div class="margen right">
                <ul id="menu_buttons">
-                 <li href="">
+                 <li>
                    <button onClick="window.location = '<?php echo constant('URL'); ?>home'">
                      <span class="glyphicon glyphicon-home"></span>Inicio
+                   </button>
+                 </li>
+                 <li>
+                   <button onClick="window.location = '<?php echo constant('URL'); ?>update'" style="width:130px;">
+                    <span class="glyphicon glyphicon-upload"></span>Actualizar BD
                    </button>
                  </li>
                  <li>

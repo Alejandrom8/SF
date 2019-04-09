@@ -60,7 +60,7 @@ class Home extends Controller{
       $aux = $i <10 ? "0".$i : $i;
       foreach($data as $key => $value){
         if($value['hora'] == $aux){
-          $clase = ["rfc" => $value['rfc'],"hora" => $value['hora'],"name" => $value['name'], "grupo" => $value['grupo'], "salon" => $value['salon'],"asig" => $value['asig']];
+          $clase = ["rfc" => $value['rfc'],"hora" => $value['hora'],"name" => $value['name'], "grupo" => $value['grupo'], "salon" => $value['salon'],"asig" => $value['asig'], "clave" => $value['clave']];
           array_push(${'hora_' . $i}, $clase);
         }
       }
@@ -76,7 +76,6 @@ class Home extends Controller{
     */
     //formato solicitado 1 = lista de asistencia; 2 = horario
     $formato = $this->test_input($_POST['formato']);
-
     switch ($formato) {
       case 1://En caso de que sea listas de asistencia
         //se toman todos los valores que vengan del formulario con id="data" y

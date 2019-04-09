@@ -13,7 +13,7 @@
     <div class="margen">
       <section class=" block col-sm-4" id="menu_form">
         <div class="col-sm-12">
-          <h1>Generar Formatos</h1>
+          <h1>Formatos</h1>
           <br>
         </div>
         <div class="menu_form_data col-sm-12">
@@ -25,10 +25,10 @@
                     <select name="formato" id="formato" class="form-control">
                       <option value="">Seleccione un formato</option>
                       <option value="1">Lista de asistencia</option>
-                      <optgroup label="horarios">
-                        <option value="2">Grupo</option>
+                      <optgroup label="horarios (proximamente...)">
+                        <!-- <option value="2">Grupo</option>
                         <option value="3">Profesor</option>
-                        <option value="4">Salon</option>
+                        <option value="4">Salon</option> -->
                       </optgroup>
                     </select>
                   </div>
@@ -61,7 +61,7 @@
                     <div class="form-group row">
                       <div class="col-xs-6">
                         <div class="form-group">
-                          <label for="fecha">Dia</label>
+                          <label for="fecha">Día</label>
                           <input type="date" name="fecha" id="fecha" class="form-control">
                         </div>
                       </div>
@@ -110,7 +110,7 @@
                   <div class="options" id="boton">
                     <div class="row">
                       <div class="col-sm-6">
-                        <input type="submit" name="submit" id="submit_btn" class="btn btn-primary">
+                        <input type="submit" name="submit" id="submit_btn" class="btn btn-primary" value="Generar Formatos">
                       </div>
                       <div class="col-sm-6 another">
 
@@ -130,8 +130,6 @@
     </div>
   </div>
   <?php include_once 'views/footer.php'; ?>
-  <script type="text/javascript">
-  </script>
 </body>
 <script src="<?php echo constant('URL'); ?>public/js/ajax/create.js"></script>
 </html>

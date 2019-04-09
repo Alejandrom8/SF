@@ -32,3 +32,9 @@
   height:96%;
   overflow-y: scroll;
 }
+input[type="date"]{
+  text-align: center;
+  padding-left:5%;
+  height:4%;
+  padding:2%;
+}

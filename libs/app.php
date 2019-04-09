@@ -24,29 +24,29 @@ class App{
         $controller->render();
         return false;
       }
-
       //  definimos el archivo al que se va a redireccionar
       //  de acuerdo al controlador que se llame
       $archivoController = 'controllers/' . $url[0] . '.php';
 
       //  verificando que el archivo exista
       if(file_exists($archivoController)){
-
           //  llamamos al archivo solicitado para usar sus clases
           require_once $archivoController;
-          $controller = new $url[0];
-          $controller->loadModel($url[0]);
-          //  #numero de elementos que contiene la url dividida en un array
-          $nparam = sizeof($url);
 
           //  verificamos que halla una sesion iniciada para
           //  que el usuario pueda entrar a los diferentes metodos
-          if($url[0] != 'login'){
+          if($url[0] != 'login' and $url[0] != 'salir'){
              if(!isset($_SESSION['user']) or !isset($_SESSION['pass'])){
                print("<script>alert('Acceso denegado! Inicie sesion antes de entrar');window.location = '". constant('URL') ."salir';</script>");
                die();
              }
           }
+
+          $controller = new $url[0];
+          $controller->loadModel($url[0]);
+          //  #numero de elementos que contiene la url dividida en un array
+          $nparam = sizeof($url);
+
           //  si en la url se introdujera mas de 2 posiciones (ejemplo: ../controlador[0]/metodo[1]/parametro[2])
           //  se generara un bucle que almacena en un array nuevo llamado 'param' y posteriormente llamamos al archivo
           //  solicitado con el objeto que se indique y los diferentes parametros que se introduscan a la url.

@@ -14,6 +14,7 @@
       height:93.58vh;
     }
   </style>
+
 </head>
 <body>
   <div class="contenedor col-sm-12">
@@ -64,7 +65,8 @@
       <div>
         <footer>
           <div>
-            <p>hola como estas</p>
+            <br>
+            <div style="float:right;"><p>®UNAM</p></div>
           </div>
         </footer>
       </div>

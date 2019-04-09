@@ -13,7 +13,10 @@
 
         </div>
         <div class="col-sm-4">
-
+          <center>
+            <br>
+          <img src="<?php echo constant('URL'); ?>public/img/leopardos.png" width="130px" height:="130px">
+        </center>
         </div>
       </footer>
     </div>

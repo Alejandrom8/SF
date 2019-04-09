@@ -72,6 +72,5 @@
       </div>
     </div>
   </section>
-  <!-- <script src="<?php echo constant('URL'); ?>public/js/ajax/login.js"></script> -->
 </body>
 </html>
